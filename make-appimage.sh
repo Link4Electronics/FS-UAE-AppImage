@@ -15,7 +15,7 @@ export DEPLOY_PYTHON=1
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun /usr/bin/fs-uae-launcher /usr/bin/fs-uae /usr/bin/fs-uae-device-helper
+quick-sharun ./AppDir/bin/fs-uae-launcher /usr/bin/fs-uae /usr/bin/fs-uae-device-helper
 
 # Additional changes can be done in between here
 
