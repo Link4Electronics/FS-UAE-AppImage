@@ -6,7 +6,11 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-# pacman -Syu --noconfirm PACKAGESHERE
+pacman -Syu --noconfirm \
+    fs-uae          \
+    fs-uae-launcher \
+    libdecor        \
+    python
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
