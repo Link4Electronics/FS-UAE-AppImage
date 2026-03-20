@@ -11,7 +11,8 @@ pacman -Syu --noconfirm \
     fs-uae-launcher \
     libdecor        \
     python          \
-    python-lhafile
+    python-lhafile  \
+    python-opengl
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
