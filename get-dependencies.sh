@@ -21,7 +21,7 @@ get-debloated-pkgs --add-common --prefer-nano
 mkdir -p ./AppDir/bin
 echo "Geting FS-UAE Launcher..."
 echo "---------------------------------------------------------------"
-case "$ARCH" in # they use AMD64 and ARM64 for the deb links
+case "$ARCH" in # they use x86-64 and ARM64 for the deb links
 	x86_64)  xz_arch=x86-64;;
 	aarch64) xz_arch=ARM64;;
 esac
