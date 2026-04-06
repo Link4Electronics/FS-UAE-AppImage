@@ -8,6 +8,7 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     fs-uae   	  \
+	glu		      \
     libdecor 	  \
 	python	 	  \
 	python-pillow \
