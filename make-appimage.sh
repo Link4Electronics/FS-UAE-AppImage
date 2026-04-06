@@ -11,6 +11,10 @@ export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
+case "${ARCH:-$(uname -m)}" in
+    x86_64)  xz_arch="x86-64" ;;
+    aarch64) xz_arch="ARM64" ;;
+esac
 quick-sharun ./AppDir/bin/Linux/${xz_arch}/fs-uae-launcher /usr/bin/fs-uae /usr/bin/fs-uae-device-helper
 #echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 
