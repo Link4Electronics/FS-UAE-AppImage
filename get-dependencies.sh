@@ -32,3 +32,15 @@ XZ_LINK=$(wget --retry-connrefused --tries=30 \
       | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*releases.*Linux_$xz_arch.*tar.xz")
 wget "$XZ_LINK" -O /tmp/app.tar.xz
 tar -xvf /tmp/app.tar.xz -C ./AppDir/bin --strip-components=1
+cd ./AppDir/bin/Linux/${xz_arch}/_internal
+rm -rf pillow.libs
+KEEP_FILES="base_library.zip libbrotlicommon.so.1 libbrotlidec.so.1 libgmodule-2.0.so.0 libgthread-2.0.so.0 libk5crypto.so.3 libmd.so.0 libpython3.12.so.1.0 lzhlib.cpython-312-x86_64-linux-gnu.so"
+for item in *; do
+    # Skip directories
+    if [ -d "$item" ]; then
+        continue
+    fi
+    if [[ ! " $KEEP_FILES " =~ " $item " ]]; then
+        rm "$item"
+    fi
+done
