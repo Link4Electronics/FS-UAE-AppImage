@@ -8,9 +8,9 @@ export ARCH VERSION
 export OUTPATH=./dist
 export ADD_HOOKS="self-updater.bg.hook"
 export UPINFO="gh-releases-zsync|${GITHUB_REPOSITORY%/*}|${GITHUB_REPOSITORY#*/}|latest|*$ARCH.AppImage.zsync"
-export DEPLOY_QT=1
-export QT_DIR=qt6
-export DEPLOY_SYS_PYTHON=1
+export ICON=https://raw.githubusercontent.com/FrodeSolheim/fs-uae-launcher/refs/heads/main/share/icons/hicolor/256x256/apps/fs-uae-launcher.png
+export DESKTOP=https://raw.githubusercontent.com/FrodeSolheim/fs-uae-launcher/refs/heads/main/share/applications/fs-uae-launcher.desktop
+export STARTUPWMCLASS=
 
 # Deploy dependencies
 case "${ARCH:-$(uname -m)}" in
