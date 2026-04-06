@@ -13,7 +13,11 @@ pacman -Syu --noconfirm \
 	libwebp		  \
 	python	 	  \
 	python-pillow \
-	python-pyqt6
+	python-pyqt6  \
+	qt6-multimedia \
+	qt6-svg	\
+	qt6-wayland \
+	qt6-xcb-private-headers
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
