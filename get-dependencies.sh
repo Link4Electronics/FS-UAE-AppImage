@@ -10,6 +10,7 @@ pacman -Syu --noconfirm \
     fs-uae   	  \
 	glu		      \
     libdecor 	  \
+	libwebp		  \
 	python	 	  \
 	python-pillow \
 	python-pyqt6
