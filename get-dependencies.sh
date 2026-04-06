@@ -7,10 +7,10 @@ ARCH=$(uname -m)
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
-    fs-uae   \
-    libdecor \
-	python	 \
-	qt6-base
+    fs-uae   	 \
+    libdecor 	 \
+	python	 	 \
+	python-pyqt6
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
