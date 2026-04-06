@@ -8,7 +8,9 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm \
     fs-uae   \
-    libdecor
+    libdecor \
+	python	 \
+	qt6-base
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
