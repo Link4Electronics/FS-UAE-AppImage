@@ -27,7 +27,7 @@ case "$ARCH" in # they use x86-64 and ARM64 for the deb links
 esac
 XZ_LINK=$(wget --retry-connrefused --tries=30 \
 	  https://api.github.com/repos/FrodeSolheim/fs-uae-launcher/releases -O - \
-      | sed 's/[()",{} ]/\n/g' | grep -o -m 1 'https.*releases.*Linux_$xz_arch.*tar.xz')
+      | sed 's/[()",{} ]/\n/g' | grep -o -m 1 "https.*releases.*Linux_$xz_arch.*tar.xz")
 wget "$XZ_LINK" -O /tmp/app.tar.xz
 #wget https://github.com/FrodeSolheim/fs-uae-launcher/releases/download/v3.2.35/FS-UAE-Launcher_3.2.35_Linux_${xz_arch}.tar.xz
 tar -xvJf /tmp/app.tar.xz -C ./AppDir/bin --strip-components=1
