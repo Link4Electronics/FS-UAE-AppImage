@@ -17,7 +17,7 @@ case "${ARCH:-$(uname -m)}" in
     x86_64)  xz_arch="x86-64" ;;
     aarch64) xz_arch="ARM64" ;;
 esac
-quick-sharun ./AppDir/bin/Linux/${xz_arch}/fs-uae-launcher /usr/bin/fs-uae /usr/bin/fs-uae-device-helper
+quick-sharun  ./AppDir/bin/* /usr/bin/fs-uae /usr/bin/fs-uae-device-helper #./AppDir/bin/Linux/${xz_arch}/fs-uae-launcher
 echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 
 # Additional changes can be done in between here
