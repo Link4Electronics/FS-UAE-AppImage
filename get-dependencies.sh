@@ -31,7 +31,6 @@ if ! wget --retry-connrefused --tries=30 "$XZ_LINK" -O /tmp/app.tar.xz 2>/tmp/do
 	cat /tmp/download.log
 	exit 1
 fi
-
 #wget https://github.com/FrodeSolheim/fs-uae-launcher/releases/download/v3.2.35/FS-UAE-Launcher_3.2.35_Linux_${xz_arch}.tar.xz
 tar -xxJf /tmp/app.tar.xz -C ./AppDir/bin --strip-components=1
 
