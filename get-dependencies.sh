@@ -37,10 +37,11 @@ VERSION="${LAUNCHER_VERSION:-$(git ls-remote --tags --sort=-v:refname "$REPO" \
 VERSION="${VERSION#v}"
 git clone --branch "v$VERSION" --single-branch --depth 1 "$REPO" ./fs-uae-launcher
 
-mkdir -p ./AppDir/bin #./AppDir/shared/bin
+mkdir -p ./AppDir/bin ./AppDir/shared/bin
 cd ./fs-uae-launcher
 # python -m build all -> bootstrap, make (translations), PyInstaller, bundle, tar.xz
-uv run python -m build all
+#uv run python -m build all
+python -m build all
 #cd ..
 
 #echo "Installing FS-UAE Launcher into AppDir..."
@@ -56,8 +57,7 @@ mv -v ./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/fs-uae-launcher \
 	./build/_build/FS-UAE-Launcher/Locale \
 	./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/_internal ../AppDir/bin
 cd ../
-#ln -sfn ../../bin/_internal ../AppDir/shared/bin/_internal
-ln -sfn ./AppDir/bin/_internal/libpython3.12.so.1.0 /usr/lib/libpython3.12.so.1.0
+ln -sfn ../../bin/_internal ../AppDir/shared/bin/_internal
 
 #mkdir -p ./AppDir/bin ./AppDir/shared/bin
 # quick-sharun copies the launcher binary to AppDir/shared/bin and hardlinks a
