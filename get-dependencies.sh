@@ -55,7 +55,7 @@ esac
 mv -v ./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/fs-uae-launcher \
 	./build/_build/FS-UAE-Launcher/Resources \
 	./build/_build/FS-UAE-Launcher/Locale \
-	./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/_internal ./AppDir/bin
+	./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/_internal ../AppDir/bin
 
 #mkdir -p ./AppDir/bin ./AppDir/shared/bin
 # quick-sharun copies the launcher binary to AppDir/shared/bin and hardlinks a
