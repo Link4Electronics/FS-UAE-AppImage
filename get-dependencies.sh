@@ -8,7 +8,6 @@ echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
 pacman -Syu --noconfirm 	\
     fs-uae   	   			\
-	gettext					\
 	glu		       			\
 	kvantum       			\
 	libwebp		   			\
