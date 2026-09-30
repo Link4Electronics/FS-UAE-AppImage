@@ -6,16 +6,20 @@ ARCH=$(uname -m)
 
 echo "Installing package dependencies..."
 echo "---------------------------------------------------------------"
-pacman -Syu --noconfirm \
-    fs-uae   	  \
-	glu		      \
-	libwebp		  \
-	python-pillow \
-	python-pyqt6  \
-	qt6-multimedia \
-	qt6-svg	\
-	qt6-wayland \
-	qt6-xcb-private-headers
+pacman -Syu --noconfirm 	\
+    fs-uae   	   			\
+	glu		       			\
+	kvantum       			\
+	libwebp		   			\
+    lxqt-qtplugin 			\
+	openal 	       			\
+	python-pillow  			\
+	python-pyqt6   			\
+	qt6-multimedia 			\
+	qt6-svg		   			\
+	qt6-wayland    		    \
+	qt6-xcb-private-headers \
+	qt6ct
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
