@@ -52,6 +52,50 @@ if [ -L ./AppDir/shared/lib/libGLU.so ] && [ ! -e ./AppDir/shared/lib/libGLU.so.
     fi
 fi
 
+# 4) The PyInstaller bootloader hard-codes <exedir>/_internal/libpython*.so and
+#    dlopens it by absolute path (the launcher binary has no RPATH, and
+#    LD_LIBRARY_PATH is only consulted after that dlopen already succeeded).
+#    quick-sharun moves the real launcher binary to AppDir/shared/bin, but
+#    current versions no longer create the matching AppDir/shared/bin/_internal
+#    link, so the AppImage dies immediately with
+#    "Failed to load Python shared library .../shared/bin/_internal/libpython3.12.so.1.0".
+#    Point it at the pristine PyInstaller _internal dir of the launcher tarball.
+if [ ! -e ./AppDir/shared/bin/_internal ]; then
+    intdir=$(ls -d ./AppDir/bin/Linux/*/_internal 2>/dev/null | head -n 1 || true)
+    if [ -n "$intdir" ]; then
+        mkdir -p ./AppDir/shared/bin
+        ln -sfn "$(realpath --relative-to=./AppDir/shared/bin "$intdir")" \
+            ./AppDir/shared/bin/_internal
+    fi
+fi
+
+# ---------------------------------------------------------------------------
+# Sanity checks. quick-sharun --simple-test only looks at the exit status, but
+# the launcher aborts with status 0 when it cannot load its Qt platform plugin,
+# its resource archives or its Python runtime, so CI would happily ship a
+# broken image. Verify the layout directly instead.
+# ---------------------------------------------------------------------------
+fail() {
+    echo "ERROR: AppDir layout check failed: $1" >&2
+    exit 1
+}
+
+pylib=$(ls ./AppDir/shared/bin/_internal/libpython3.1*.so.* 2>/dev/null | head -n 1 || true)
+[ -n "$pylib" ] || fail "shared/bin/_internal does not resolve to the PyInstaller runtime"
+
+[ -e ./AppDir/shared/bin/_internal/base_library.zip ] \
+    || fail "shared/bin/_internal/base_library.zip is missing"
+
+[ -e ./AppDir/shared/bin/../../Resources/launcher.zip ] \
+    || fail "AppDir/Resources does not resolve to bin/Resources/launcher.zip"
+
+qtleft=$(ls ./AppDir/shared/lib/libQt6*.so* 2>/dev/null | head -n 1 || true)
+[ -z "$qtleft" ] || fail "system Qt6 libraries still present in shared/lib: $qtleft"
+
+broken=$(find ./AppDir -xtype l -print 2>/dev/null | head -n 10)
+[ -z "$broken" ] || fail "dangling symlinks in AppDir:
+$broken"
+
 # Turn AppDir into AppImage
 quick-sharun --make-appimage
 
