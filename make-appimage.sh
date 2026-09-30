@@ -17,16 +17,6 @@ export DEPLOY_OPENGL=1
 quick-sharun  ./AppDir/bin/* /usr/bin/fs-uae /usr/bin/fs-uae-device-helper /usr/lib/libopenal.so*
 echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 
-# quick-sharun keeps the libGLU.so -> libGLU.so.1 link but drops the
-# libGLU.so.1 link itself, leaving libGLU.so dangling (PyOpenGL dlopens
-# "libGLU.so" during startup).
-#if [ -L ./AppDir/shared/lib/libGLU.so ] && [ ! -e ./AppDir/shared/lib/libGLU.so.1 ]; then
-#    glu=$(ls ./AppDir/shared/lib/libGLU.so.* 2>/dev/null | head -n 1 || true)
-#    if [ -n "$glu" ]; then
-#        ln -sfn "$(basename "$glu")" ./AppDir/shared/lib/libGLU.so.1
-#    fi
-#fi
-
 # fs-uae locates its data archive (fs-uae.dat, a zip containing all of the
 # built-in GUI graphics) relative to the real executable as
 # <exedir>/../share/fs-uae/fs-uae.dat. quick-sharun keeps the binary in
