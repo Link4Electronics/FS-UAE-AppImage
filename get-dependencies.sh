@@ -39,8 +39,6 @@ VERSION="${VERSION#v}"
 git clone --branch "v$VERSION" --single-branch --depth 1 "$REPO" ./fs-uae-launcher
 
 cd ./fs-uae-launcher
-# uv installs the pinned toolchain (Python 3.12, PyQt6, PyInstaller) from uv.lock
-#uv sync
 # python -m build all -> bootstrap, make (translations), PyInstaller, bundle, tar.xz
 uv run python -m build all
 cd ..
@@ -53,9 +51,7 @@ case "$ARCH" in
 esac
 BUNDLE=./fs-uae-launcher/build/_build/FS-UAE-Launcher
 
-rm -rf ./AppDir/bin ./AppDir/Resources ./AppDir/Locale ./AppDir/shared/bin
 mkdir -p ./AppDir/bin ./AppDir/shared/bin
-
 # quick-sharun copies the launcher binary to AppDir/shared/bin and hardlinks a
 # sharun wrapper over AppDir/bin/fs-uae-launcher, so at runtime the launcher
 # resolves its files relative to AppDir/shared/bin:
