@@ -14,7 +14,7 @@ export STARTUPWMCLASS=fs-uae-launcher
 export DEPLOY_OPENGL=1
 
 # Deploy dependencies
-quick-sharun  ./AppDir/bin/* /usr/bin/fs-uae /usr/bin/fs-uae-device-helper /usr/lib/libopenal.so*
+quick-sharun  ./AppDir/bin/* /usr/bin/fs-uae /usr/bin/fs-uae-device-helper /usr/lib/libopenal.so* ./AppDir/bin/_internal/libpython*.so
 echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 
 # fs-uae locates its data archive (fs-uae.dat, a zip containing all of the
