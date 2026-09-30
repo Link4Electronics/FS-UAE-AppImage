@@ -12,12 +12,6 @@ export ICON=https://raw.githubusercontent.com/FrodeSolheim/fs-uae-launcher/refs/
 export DESKTOP=https://raw.githubusercontent.com/FrodeSolheim/fs-uae-launcher/refs/heads/main/share/applications/fs-uae-launcher.desktop
 export STARTUPWMCLASS=fs-uae-launcher
 export DEPLOY_OPENGL=1
-# The launcher ships its own Qt inside the PyInstaller _internal directory (the
-# bundled platform plugins are built against those exact libraries, Qt only
-# accepts plugins built for the same version). Deploying the system Qt on top
-# of it makes the app die with
-# "qt.qpa.plugin: Could not find the Qt platform plugin xcb in ''".
-#export DEPLOY_QT=0
 
 # Deploy dependencies
 quick-sharun  ./AppDir/bin/* /usr/bin/fs-uae /usr/bin/fs-uae-device-helper /usr/lib/libopenal.so*
@@ -26,12 +20,12 @@ echo 'SHARUN_WORKING_DIR=${SHARUN_DIR}/bin' >> ./AppDir/.env
 # quick-sharun keeps the libGLU.so -> libGLU.so.1 link but drops the
 # libGLU.so.1 link itself, leaving libGLU.so dangling (PyOpenGL dlopens
 # "libGLU.so" during startup).
-if [ -L ./AppDir/shared/lib/libGLU.so ] && [ ! -e ./AppDir/shared/lib/libGLU.so.1 ]; then
-    glu=$(ls ./AppDir/shared/lib/libGLU.so.* 2>/dev/null | head -n 1 || true)
-    if [ -n "$glu" ]; then
-        ln -sfn "$(basename "$glu")" ./AppDir/shared/lib/libGLU.so.1
-    fi
-fi
+#if [ -L ./AppDir/shared/lib/libGLU.so ] && [ ! -e ./AppDir/shared/lib/libGLU.so.1 ]; then
+#    glu=$(ls ./AppDir/shared/lib/libGLU.so.* 2>/dev/null | head -n 1 || true)
+#    if [ -n "$glu" ]; then
+#        ln -sfn "$(basename "$glu")" ./AppDir/shared/lib/libGLU.so.1
+#    fi
+#fi
 
 # fs-uae locates its data archive (fs-uae.dat, a zip containing all of the
 # built-in GUI graphics) relative to the real executable as
