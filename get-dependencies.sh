@@ -20,23 +20,12 @@ pacman -Syu --noconfirm 	\
 	qt6-svg		   			\
 	qt6-wayland    		    \
 	qt6-xcb-private-headers \
-	qt6ct
+	qt6ct					\
+	uv
 
 echo "Installing debloated packages..."
 echo "---------------------------------------------------------------"
 get-debloated-pkgs --add-common --prefer-nano libdecor-mini
-
-echo "Installing build dependencies..."
-echo "---------------------------------------------------------------"
-if ! command -v uv > /dev/null 2>&1; then
-	pacman -S --noconfirm --needed uv || true
-fi
-if ! command -v uv > /dev/null 2>&1; then
-	echo "uv is not packaged on this system, installing the standalone uv..."
-	curl -LsSf https://astral.sh/uv/install.sh | sh
-	PATH="$HOME/.local/bin:$PATH"
-	export PATH
-fi
 
 echo "Building FS-UAE Launcher..."
 echo "---------------------------------------------------------------"
@@ -47,13 +36,11 @@ VERSION="${LAUNCHER_VERSION:-$(git ls-remote --tags --sort=-v:refname "$REPO" \
 	| grep -E '^v[0-9]+(\.[0-9]+)+$' \
 	| head -n1)}"
 VERSION="${VERSION#v}"
-echo "Checking out fs-uae-launcher v$VERSION"
-rm -rf ./fs-uae-launcher
 git clone --branch "v$VERSION" --single-branch --depth 1 "$REPO" ./fs-uae-launcher
 
 cd ./fs-uae-launcher
 # uv installs the pinned toolchain (Python 3.12, PyQt6, PyInstaller) from uv.lock
-uv sync
+#uv sync
 # python -m build all -> bootstrap, make (translations), PyInstaller, bundle, tar.xz
 uv run python -m build all
 cd ..
@@ -63,7 +50,6 @@ echo "---------------------------------------------------------------"
 case "$ARCH" in
 	x86_64)  launcher_arch=x86-64;;
 	aarch64) launcher_arch=ARM64;;
-	*) echo "ERROR: unsupported architecture: $ARCH"; exit 1;;
 esac
 BUNDLE=./fs-uae-launcher/build/_build/FS-UAE-Launcher
 
