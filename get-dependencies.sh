@@ -40,8 +40,7 @@ git clone --branch "v$VERSION" --single-branch --depth 1 "$REPO" ./fs-uae-launch
 mkdir -p ./AppDir/bin ./AppDir/shared/bin
 cd ./fs-uae-launcher
 # python -m build all -> bootstrap, make (translations), PyInstaller, bundle, tar.xz
-#uv run python -m build all
-python -m build all
+uv run python -m build all
 #cd ..
 
 #echo "Installing FS-UAE Launcher into AppDir..."
