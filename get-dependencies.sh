@@ -57,6 +57,7 @@ mv -v ./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/fs-uae-launcher \
 	./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/_internal ../AppDir/bin
 cd ../
 #ln -sfn ../../bin/_internal ../AppDir/shared/bin/_internal
+ln -sfn ./AppDir/bin/_internal/libpython3.12.so.1.0 /usr/lib/libpython3.12.so.1.0
 
 #mkdir -p ./AppDir/bin ./AppDir/shared/bin
 # quick-sharun copies the launcher binary to AppDir/shared/bin and hardlinks a
