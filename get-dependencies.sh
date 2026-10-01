@@ -52,9 +52,9 @@ esac
 #BUNDLE=./fs-uae-launcher/build/_build/FS-UAE-Launcher
 
 mv -v ./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/fs-uae-launcher \
-	./build/_build/FS-UAE-Launcher/Resources \
-	./build/_build/FS-UAE-Launcher/Locale \
 	./build/_build/FS-UAE-Launcher/Linux/$launcher_arch/_internal ../AppDir/bin
+mv -v ./build/_build/FS-UAE-Launcher/Resources \
+	./build/_build/FS-UAE-Launcher/Locale ../AppDir
 cd ../
 ln -sfn ../../bin/_internal ./AppDir/shared/bin/_internal
 
